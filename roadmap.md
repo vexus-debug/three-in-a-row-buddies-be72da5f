@@ -61,3 +61,6 @@
 - [x] QC defect photos saved to case files
 - [x] Lot recall search on the Case Board
 - [x] Dentist impression scorecard on Reports
+
+## Lab Phase 4.1: Catalogue & stock
+- [x] QC queue nesting fix, bench shade recipes, tests, update entry
