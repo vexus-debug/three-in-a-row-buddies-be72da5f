@@ -13,6 +13,19 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.30.0",
+    date: "October 31, 2026",
+    title: "Dental lab catalogue & stock: live work types, stock that counts down, shade recipes on the bench",
+    kind: "feature",
+    items: [
+      { kind: "feature", text: "New cases use your Work Types catalogue: due date from turnaround days and the fee from the clinic's agreed price or the catalogue price." },
+      { kind: "feature", text: "Pick a material lot from stock on a case; it is taken off stock and recorded for traceability. Expired or recalled lots can't be used." },
+      { kind: "feature", text: "My Bench cards show the shade recipe and notes from your Shade Library." },
+      { kind: "improvement", text: "Materials show quantities in units with low-stock, expired and expiring-soon counts." },
+      { kind: "fix", text: "Fixed a page display warning in the Quality Control queue." },
+    ],
+  },
+  {
     version: "v2.29.0",
     date: "October 30, 2026",
     title: "Dental lab shop floor: barcode scanning, bench timers, bridge charting",

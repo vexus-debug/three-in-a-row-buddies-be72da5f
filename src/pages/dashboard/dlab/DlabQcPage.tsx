@@ -59,11 +59,11 @@ export default function DlabQcPage() {
         {queue.map((c) => (
           <div key={c.id} className="flex items-center gap-3 p-3">
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">
+              <div className="truncate text-sm font-medium">
                 <span className="font-mono text-xs text-muted-foreground">{c.case_number}</span> · {teethOf(c).length ? `#${teethOf(c).join(", #")} · ` : ""}{c.work_type}
                 {isRush(c) && <Badge variant="destructive" className="ml-1.5 px-1.5 py-0 text-[10px]">Rush</Badge>}
                 {(c as any).qc_status === "rework_needed" && <Badge variant="outline" className="ml-1.5 border-warning px-1.5 py-0 text-[10px]">Re-inspection</Badge>}
-              </p>
+              </div>
               <p className="truncate text-xs text-muted-foreground">
                 {clientOf(c)} · {patientOf(c)} · Shade {c.shade || "—"} · {stageLabel(c.status)}{c.due_date ? ` · Due ${format(new Date(c.due_date), "d MMM")}` : ""}
               </p>
