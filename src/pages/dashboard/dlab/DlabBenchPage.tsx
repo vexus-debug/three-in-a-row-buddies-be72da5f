@@ -19,6 +19,7 @@ import { benchTasks } from "@/lib/labBench";
 import { formatDuration, matchScannedCase, teethLabel, timerElapsedMs, timerPause, timerRunning, timerStart, type TimerState } from "@/lib/labScanner";
 import { toast } from "@/hooks/use-toast";
 import { PrintTravelerButton } from "@/components/dlab/PrintTravelerButton";
+import { useShadeLibrary } from "@/hooks/useLabCatalog";
 
 const TIMER_KEY = "dlab-bench-timers";
 type Timers = Record<string, TimerState>;
@@ -26,6 +27,7 @@ const loadTimers = (): Timers => { try { return JSON.parse(localStorage.getItem(
 
 export default function DlabBenchPage() {
   const { data: cases = [] } = useLabCases();
+  const shades = useShadeLibrary();
   const { data: staff = [] } = useStaff();
   const { user } = useAuth() as any;
   const { currentOrg } = useOrg();
@@ -134,6 +136,12 @@ export default function DlabBenchPage() {
                   {teeth.length > 0 && <span className="font-medium">#{teethLabel(teeth, c.tooth_roles || {}).join(", #")} · </span>}
                   {c.work_type}{c.shade ? ` · ${c.shade}` : ""}
                 </p>
+                {(() => {
+                  const sh = shades.find(c.shade);
+                  const d = sh?.data || {};
+                  const recipe = [d.guide, d.stump && `Stump ${d.stump}`, d.cervical && `Cervical ${d.cervical}`, d.body && `Body ${d.body}`, d.incisal && `Incisal ${d.incisal}`, d.notes].filter(Boolean).join(" · ");
+                  return recipe ? <p className="rounded-md bg-muted/50 px-2 py-1 text-xs"><span className="font-medium">Shade recipe:</span> {recipe}</p> : null;
+                })()}
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>{stageLabel(c.status)}</span>
                   <span>{c.due_date ? `Due ${c.due_date}` : "No due date"}</span>
