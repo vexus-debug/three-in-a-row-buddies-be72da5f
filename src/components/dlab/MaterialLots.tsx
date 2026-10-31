@@ -11,7 +11,7 @@ import { clientOf, patientOf } from "@/hooks/useDentalLab";
 import { conformityBlockers, printConformity, validateMaterialLot, type MaterialLot } from "@/lib/labConformity";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLabRecords } from "@/hooks/useLabRecords";
-import { usableLots } from "@/lib/labCatalog";
+import { usableLots, materialSpecs } from "@/lib/labCatalog";
 
 const today = () => new Date().toISOString().slice(0, 10);
 const blank: MaterialLot = { material: "", manufacturer: "", lot: "", shade: "", expiry: "" };
@@ -118,7 +118,7 @@ export function MaterialLots({ c, teeth }: { c: LabCaseRow; teeth: string[] }) {
             <Select value={stockId} onValueChange={setStockId}>
               <SelectTrigger className="min-w-0 flex-1"><SelectValue placeholder="Choose a lot" /></SelectTrigger>
               <SelectContent>{usable.map((r: any) => (
-                <SelectItem key={r.id} value={r.id}>{r.title} · {r.data?.lot || "no lot"} · {Number(r.amount)} {r.data?.unit || "units"} left{r.record_date ? ` · exp ${r.record_date}` : ""}</SelectItem>
+                <SelectItem key={r.id} value={r.id}>{r.title}{materialSpecs(r) ? ` · ${materialSpecs(r)}` : ""} · {r.data?.lot || "no lot"} · {Number(r.amount)} {r.data?.unit || "units"} left{r.record_date ? ` · exp ${r.record_date}` : ""}</SelectItem>
               ))}</SelectContent>
             </Select>
             <Input type="number" min={0.01} step="any" aria-label="Units used" className="w-24" value={units} onChange={(e) => setUnits(e.target.value)} />
