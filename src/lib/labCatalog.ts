@@ -90,3 +90,12 @@ export function shadeOptions(records: CatalogRecord[]): string[] {
 /** Library entry matching a case's shade (case-insensitive), for showing notes on the bench. */
 export const findShade = (records: CatalogRecord[], code?: string | null) =>
   code ? records.find((r) => r.status === "active" && r.title?.trim().toLowerCase() === code.trim().toLowerCase()) : undefined;
+
+/** Short clinical spec line for a stock lot, e.g. "14 mm · ST · A2 · 405 nm". */
+export function materialSpecs(r: { data?: Record<string, any> | null }): string {
+  const d = r.data || {};
+  const keys = ["thickness", "translucency", "spec", "size", "wavelength", "bio_class", "platform", "interface"];
+  const vals = keys.map((k) => d[k]).filter((v) => v && v !== "Not applicable");
+  if (d.volume_ml) vals.push(`${d.volume_ml} ml`);
+  return vals.join(" · ");
+}

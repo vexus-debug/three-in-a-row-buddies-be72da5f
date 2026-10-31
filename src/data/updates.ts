@@ -13,6 +13,16 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.32.0",
+    date: "October 31, 2026",
+    title: "Dental lab stock: disc, resin and implant specs",
+    kind: "improvement",
+    items: [
+      { kind: "feature", text: "Record disc thickness, translucency, resin wavelength and volume, biocompatibility class and implant platform/interface on each material lot." },
+      { kind: "improvement", text: "Choosing a lot from stock on a case now shows its specs, so the right disc or resin is picked." },
+    ],
+  },
+  {
     version: "v2.31.0",
     date: "October 31, 2026",
     title: "Dental lab work types: procedure codes and bridges at case intake",

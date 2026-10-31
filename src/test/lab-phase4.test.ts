@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { workTypeOptions, suggestedFee, stockState, usableLots, shadeOptions, findShade } from "@/lib/labCatalog";
+import { workTypeOptions, suggestedFee, stockState, usableLots, shadeOptions, findShade, materialSpecs } from "@/lib/labCatalog";
 
 const rec = (o: any) => ({ title: "", status: "active", amount: 0, record_date: null, data: {}, ...o });
 
@@ -38,5 +38,9 @@ describe("lab phase 4 catalogue & stock", () => {
     expect(shadeOptions(lib)).toContain("A2");
     expect(shadeOptions(lib)[0]).toBe("Custom A2+");
     expect(findShade(lib, "custom a2+")?.title).toBe("Custom A2+");
+  });
+  it("summarises disc and resin specs, skipping not applicable", () => {
+    expect(materialSpecs(rec({ data: { thickness: "14 mm", translucency: "ST", spec: "A2", wavelength: "Not applicable" } }))).toBe("14 mm · ST · A2");
+    expect(materialSpecs(rec({ data: { wavelength: "405 nm", volume_ml: 500 } }))).toBe("405 nm · 500 ml");
   });
 });
