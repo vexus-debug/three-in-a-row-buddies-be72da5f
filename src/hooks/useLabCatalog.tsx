@@ -8,6 +8,9 @@ export function useWorkTypeCatalog() {
   return useMemo(() => workTypeOptions(data as CatalogRecord[]), [data]);
 }
 
+/** Alias: active restorations from the catalogue, falling back to defaults. */
+export const useWorkTypes = useWorkTypeCatalog;
+
 /** Shade codes from the Shade Library (plus VITA Classical) and a lookup for notes. */
 export function useShadeLibrary() {
   const { data = [] } = useLabRecords("shades");

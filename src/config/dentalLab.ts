@@ -119,6 +119,7 @@ export const LAB_REGISTERS: Record<string, RegisterConfig> = {
       { key: "turnaround_days", label: "Turnaround (working days)", type: "number" },
       { key: "material", label: "Default material" },
       { key: "cdt", label: "CDT / procedure code (e.g. D2740)" },
+      { key: "multi_unit", label: "Multi-unit (bridge)", type: "select", options: ["No", "Yes"] },
     ],
   },
   shades: {

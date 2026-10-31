@@ -8,6 +8,10 @@ describe("lab phase 4 catalogue & stock", () => {
     const w = workTypeOptions([rec({ title: "Zirconia Crown", amount: 40000, data: { turnaround_days: 4 } })]);
     expect(w[0]).toMatchObject({ name: "Zirconia Crown", price: 40000, turnaround: 4 });
   });
+  it("reads the bridge flag and CDT code from the catalogue", () => {
+    const w = workTypeOptions([rec({ title: "PFM Bridge", data: { multi_unit: "Yes", cdt: "D6750" } })]);
+    expect(w[0]).toMatchObject({ multiUnit: true, cdt: "D6750" });
+  });
   it("hides retired work types", () => {
     const w = workTypeOptions([rec({ title: "Zirconia Crown", status: "retired" })]);
     expect(w.some((x) => x.name === "Zirconia Crown")).toBe(false);
