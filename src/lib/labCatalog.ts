@@ -4,7 +4,7 @@ import { turnaroundFor } from "@/lib/labCalendar";
 
 export interface CatalogRecord { id?: string; title: string; status: string; amount: number | null; record_date?: string | null; data: Record<string, any> }
 
-export interface WorkTypeOption { name: string; price: number | null; turnaround: number; category?: string; cdt?: string; material?: string }
+export interface WorkTypeOption { name: string; price: number | null; turnaround: number; category?: string; cdt?: string; material?: string; multiUnit?: boolean }
 
 /** Active catalogue work types first, then built-in defaults not already in the catalogue. */
 export function workTypeOptions(records: CatalogRecord[]): WorkTypeOption[] {
@@ -20,6 +20,7 @@ export function workTypeOptions(records: CatalogRecord[]): WorkTypeOption[] {
       name, price: Number(r.amount) > 0 ? Number(r.amount) : null,
       turnaround: t > 0 ? Math.round(t) : turnaroundFor(name),
       category: r.data?.category, cdt: r.data?.cdt, material: r.data?.material,
+      multiUnit: r.data?.multi_unit === "Yes",
     });
   });
   // Retired catalogue items are hidden, including built-in names.

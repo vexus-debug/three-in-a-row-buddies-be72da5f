@@ -13,6 +13,16 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.31.0",
+    date: "October 31, 2026",
+    title: "Dental lab work types: procedure codes and bridges at case intake",
+    kind: "improvement",
+    items: [
+      { kind: "feature", text: "Mark a work type as multi-unit (bridge); it shows next to the name when receiving or editing a case." },
+      { kind: "improvement", text: "Editing a case now lists your catalogue work types with their procedure codes and usual turnaround." },
+    ],
+  },
+  {
     version: "v2.30.0",
     date: "October 31, 2026",
     title: "Dental lab catalogue & stock: live work types, stock that counts down, shade recipes on the bench",

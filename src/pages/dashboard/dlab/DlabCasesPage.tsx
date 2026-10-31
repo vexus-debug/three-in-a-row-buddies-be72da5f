@@ -314,8 +314,9 @@ function EditCase({ c, technicians, onDone }: { c: LabCaseRow; technicians: { id
       <F label="Work type">
         <Select value={v.work_type} onValueChange={(x) => set("work_type", x)}>
           <SelectTrigger><SelectValue /></SelectTrigger>
-          <SelectContent>{types.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}</SelectContent>
+          <SelectContent>{types.map((w) => { const o = catalog.find((x) => x.name === w); return <SelectItem key={w} value={w}>{w}{o?.cdt ? ` · ${o.cdt}` : ""}{o?.multiUnit ? " · bridge" : ""}</SelectItem>; })}</SelectContent>
         </Select>
+        {catalog.find((x) => x.name === v.work_type) && <p className="text-[11px] text-muted-foreground">Usual turnaround: {catalog.find((x) => x.name === v.work_type)!.turnaround} working days</p>}
       </F>
       <div className="sm:col-span-2"><F label="Teeth"><TeethPicker value={teeth} onChange={setTeeth} roles={roles} onRolesChange={setRoles} /></F></div>
       <F label="Shade"><Input list="dlab-edit-shades" value={v.shade} onChange={(e) => set("shade", e.target.value)} />
@@ -400,7 +401,7 @@ export function NewCaseDialog({ open, onOpenChange, defaultClient = "" }: { open
           <F label="Work type">
             <Select value={v.work_type} onValueChange={(x) => set("work_type", x)}>
               <SelectTrigger><SelectValue /></SelectTrigger>
-              <SelectContent>{catalog.map((w) => <SelectItem key={w.name} value={w.name}>{w.name}{w.cdt ? ` · ${w.cdt}` : ""}</SelectItem>)}</SelectContent>
+              <SelectContent>{catalog.map((w) => <SelectItem key={w.name} value={w.name}>{w.name}{w.cdt ? ` · ${w.cdt}` : ""}{w.multiUnit ? " · bridge" : ""}</SelectItem>)}</SelectContent>
             </Select>
             {wt(v.work_type) && <p className="text-[11px] text-muted-foreground">Usual turnaround: {wt(v.work_type)!.turnaround} working days</p>}
           </F>
